@@ -3,8 +3,8 @@
 //define('BASEURL', 'http://localhost/sesendokneo/public/');
 //define('pathURL', 'http://localhost/sesendokneo/public/');
 define('LOCALURL', 'http://192.168.1.6:8085/');
-define('BASEURL', 'http://192.168.1.6:8085/');
-define('pathURL', 'http://192.168.1.6:8085/');
+define('BASEURL', 'http://192.168.1.6:8085/public/');
+define('pathURL', 'http://192.168.1.6:8085/public/');
 $msx = rand(32, 64);
 $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ()<>?{}#$&=-*^@';
 $keyEnc = substr(str_shuffle($permitted_chars), 0, $msx);
