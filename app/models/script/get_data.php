@@ -2608,9 +2608,11 @@ class get_data
     } else {
       $real_path = realpath(dirname(__FILE__));
       if (strpos($real_path, 'script')) {
-        header("Location: login");
+        //header("Location: login");
+        header("Location: " . BASEURL . "login");
       } else {
-        header("Location: login");
+        //header("Location: login");
+        header("Location: " . BASEURL . "login");
       }
     }
     if ($formValue != null && $keyEncrypt) {
