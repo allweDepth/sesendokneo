@@ -3,6 +3,8 @@ class Masuk
 {
     public function masuk()
     {
+        header('Content-Type: text/plain');  // supaya response mudah dibaca
+    echo "DEBUG: masuk.php dijalankan\n";
         var_dump($_POST);
         require 'init_no_session.php';
         if (isset($_SESSION["user"])) {
