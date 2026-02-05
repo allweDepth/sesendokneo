@@ -68,18 +68,18 @@
                     <img src="img/avatar2/large/kristy.png">
                 </div>
                 <div class="content">
-                    <a class="header">Sumarlin, ST</a>
+                    <a class="header">Syamsunnar, SP, MM </a>
                     <div class="meta">
-                        <span class="date">Joined in 2013</span>
+                        <span class="date">2026</span>
                     </div>
                     <div class="description">
-                        Kristy is an art director living in New York.
+                        Ide yang datang dari keikhlasan.
                     </div>
                 </div>
                 <div class="extra content">
                     <a>
                         <i class="user icon"></i>
-                        22 Friends
+                        500k Friends
                     </a>
                 </div>
             </div>
