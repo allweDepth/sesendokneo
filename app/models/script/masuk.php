@@ -3,9 +3,14 @@ class Masuk
 {
     public function masuk()
     {
-        header('Content-Type: text/plain');  // supaya response mudah dibaca
+        // Paksa response text supaya mudah dibaca di Network
+    header('Content-Type: text/plain; charset=utf-8');
+
+    // Debug awal
     echo "DEBUG: masuk.php dijalankan\n";
-        var_dump($_POST);
+    echo "POST keys: " . implode(', ', array_keys($_POST)) . "\n";
+    echo "Username: " . ($_POST['username'] ?? 'TIDAK ADA') . "\n";
+    echo "Password input: " . ($_POST['password'] ?? 'TIDAK ADA') . "\n";
         require 'init_no_session.php';
         if (isset($_SESSION["user"])) {
             unset($_SESSION["user"]);
