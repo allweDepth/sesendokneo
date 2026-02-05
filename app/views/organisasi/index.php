@@ -73,7 +73,7 @@
                         <span class="date">2026</span>
                     </div>
                     <div class="description">
-                        Ide yang datang dari keikhlasan.
+                        Kepala Dinas
                     </div>
                 </div>
                 <div class="extra content">
@@ -94,7 +94,7 @@
                             <a>Friends</a>
                         </div>
                         <div class="description">
-                            Matthew is an interior designer living in New York.
+                            Kepala Bidang
                         </div>
                     </div>
                     <div class="extra content">
@@ -117,7 +117,7 @@
                             <span class="date">Coworker</span>
                         </div>
                         <div class="description">
-                            Molly is a personal assistant living in Paris.
+                            Sekretaris
                         </div>
                     </div>
                     <div class="extra content">
@@ -140,7 +140,7 @@
                             <a>----</a>
                         </div>
                         <div class="description">
-                            Elyse is a copywriter working in New York.
+                            Kepala Bidang
                         </div>
                     </div>
                     <div class="extra content">
@@ -163,7 +163,7 @@
                             <a>Friends</a>
                         </div>
                         <div class="description">
-                            Matthew is an interior designer living in New York.
+                            Kepala Bidang
                         </div>
                     </div>
                     <div class="extra content">
@@ -181,12 +181,12 @@
                         <img src="img/avatar2/large/molly.png">
                     </div>
                     <div class="content">
-                        <div class="header">NURMADINA,S.Sos.M.SI</div>
+                        <div class="header">NURMADINA, S.Sos. M.SI</div>
                         <div class="meta">
                             <span class="date">Coworker</span>
                         </div>
                         <div class="description">
-                            Molly is a personal assistant living in Paris.
+                            Kepala Bidang
                         </div>
                     </div>
                     <div class="extra content">
@@ -225,7 +225,7 @@
             </div>
             <div class="ui three stackable horizontal centered cards">
             <?php
-            for ($i=0; $i < 40; $i++) { 
+            for ($i=0; $i < 6; $i++) { 
                 echo '<div class="card">
                 <div class="image">
                     <img src="img/avatar2/large/matthew.png">
