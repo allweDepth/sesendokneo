@@ -4,7 +4,7 @@ class Masuk
     public function masuk()
     {
         // Paksa tidak redirect dulu untuk debug
-        header('Content-Type: text/plain; charset=utf-8');
+        header('Content-Type: application/json; charset=utf-8');
 
         // Debug awal
         echo "DEBUG: masuk.php DIPANGGIL\n";
@@ -15,7 +15,7 @@ class Masuk
         if (isset($_SESSION["user"])) {
             unset($_SESSION["user"]);
         }
-        
+
         $DB = DB::getInstance();
         $keyEncrypt = $_SESSION['key_encrypt'];
         $user = new User();
@@ -38,13 +38,13 @@ class Masuk
                 'required' => true,
                 'min_char' => 4
             ]);
-            
+
             // var_dump($password);
             // $password = password_hash($password, PASSWORD_DEFAULT);
             // var_dump(password_hash($password, PASSWORD_DEFAULT));
             //$password = $crypto->decrypt($password, $keyEncrypt);
             if ($validate->passed()) {
-                
+
                 $data = $DB->getQuery('SELECT * FROM user_sesendok_biila WHERE (username = ? OR email = ?)', [$username, $username])[0];
                 // var_dump($data);
                 $passIsValid = password_verify($password, $data->password);
@@ -56,17 +56,7 @@ class Masuk
                     //$pesanError = $user->validasiLogin($_POST);
                     if (empty($pesanError)) {
                         $status = session_status();
-                        if ($status == PHP_SESSION_NONE) {
-                            //There is no active session
-                            session_destroy();
-                        } else
-                        if ($status == PHP_SESSION_DISABLED) {
-                            //Sessions are not available
-                            session_destroy();
-                        } else
-                        if ($status == PHP_SESSION_ACTIVE) {
-                            //Destroy current and start new one
-                            session_destroy();
+                        if (session_status() === PHP_SESSION_NONE) {
                             session_start();
                         }
                         $_SESSION["user"] = (array)$data;
@@ -91,14 +81,14 @@ class Masuk
                     }
                 } elseif ($data->disable_login > 0) {
                     $session = 6;
-                }else {
+                } else {
                     $session = 5;
                 }
             } else {
                 $session = $validate->getError();
                 // var_dump($validate->getError());
             }
-        }else{
+        } else {
             $session = 7;
         }
         return $session;
