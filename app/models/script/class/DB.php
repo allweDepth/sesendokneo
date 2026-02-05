@@ -2,10 +2,14 @@
 class DB
 {
     // Property untuk koneksi ke database mysql
-    private $_host = 'localhost';
+    // private $_host = 'localhost';
+    // private $_dbname = 'sesendokneo_db';
+    // private $_username = 'root';
+    // private $_password = 'root123';
+    private $_host = 'http://192.168.1.6:8085/';
     private $_dbname = 'sesendokneo_db';
     private $_username = 'root';
-    private $_password = 'root123';
+    private $_password = 'rydcat-xYgrav-5jofto';
     // Property internal dari class DB
     private static $_instance = null;
     private $_pdo;
