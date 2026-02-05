@@ -89,7 +89,7 @@
                         <img src="img/avatar2/large/matthew.png">
                     </div>
                     <div class="content">
-                        <div class="header">Matt Giampietro</div>
+                        <div class="header">KAMARUDDIN, ST.,M.P.W.P</div>
                         <div class="meta">
                             <a>Friends</a>
                         </div>
@@ -112,7 +112,7 @@
                         <img src="img/avatar2/large/molly.png">
                     </div>
                     <div class="content">
-                        <div class="header">Molly</div>
+                        <div class="header">SRI IRDA AYU,SP.,M.Si</div>
                         <div class="meta">
                             <span class="date">Coworker</span>
                         </div>
@@ -135,9 +135,9 @@
                         <img src="img/avatar2/large/elyse.png">
                     </div>
                     <div class="content">
-                        <div class="header">Elyse</div>
+                        <div class="header">BACHTIAR B SUMAY,SH</div>
                         <div class="meta">
-                            <a>Coworker</a>
+                            <a>----</a>
                         </div>
                         <div class="description">
                             Elyse is a copywriter working in New York.
@@ -158,7 +158,7 @@
                         <img src="img/avatar2/large/matthew.png">
                     </div>
                     <div class="content">
-                        <div class="header">Matt Giampietro</div>
+                        <div class="header">I NYOMAN SUMERTA, ST.,M.P.W.P</div>
                         <div class="meta">
                             <a>Friends</a>
                         </div>
@@ -181,7 +181,7 @@
                         <img src="img/avatar2/large/molly.png">
                     </div>
                     <div class="content">
-                        <div class="header">Molly</div>
+                        <div class="header">NURMADINA,S.Sos.M.SI</div>
                         <div class="meta">
                             <span class="date">Coworker</span>
                         </div>
@@ -204,7 +204,7 @@
                         <img src="img/avatar2/large/elyse.png">
                     </div>
                     <div class="content">
-                        <div class="header">Elyse</div>
+                        <div class="header">NARDIN,ST</div>
                         <div class="meta">
                             <a>Coworker</a>
                         </div>
