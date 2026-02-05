@@ -14,7 +14,7 @@ class Masuk
         $user = new User();
         $validate = new Validate($_POST);
         //$crypto = new CryptoUtils();
-        // var_dump($_POST);
+        var_dump($_POST);
         // var_dump($validate);
         if (isset($_POST['login'])) {
             // var_dump($_POST);
