@@ -47,6 +47,17 @@ class Masuk
 
                 $data = $DB->getQuery('SELECT * FROM user_sesendok_biila WHERE (username = ? OR email = ?)', [$username, $username])[0];
                 // var_dump($data);
+                $result = $DB->getQuery(
+                    'SELECT * FROM user_sesendok_biila WHERE (username = ? OR email = ?)',
+                    [$username, $username]
+                );
+
+                if (!$result) {
+                    echo json_encode(['status' => 5]); // user tidak ditemukan
+                    exit;
+                }
+
+                $data = $result[0];
                 $passIsValid = password_verify($password, $data->password);
                 // var_dump("passIsValid = $passIsValid");
                 //var_dump(sizeof((array)$data));
@@ -60,7 +71,8 @@ class Masuk
                             session_start();
                         }
                         $_SESSION["user"] = (array)$data;
-                        $_SESSION["user"]["key_encrypt"] = KEY_ENCRYPT;
+                        // $_SESSION["user"]["key_encrypt"] = KEY_ENCRYPT;
+                        $_SESSION["user"]["key_encrypt"] = $_SESSION["key_encrypt"] ?? null;
                         //var_dump($_SESSION);
                         $id = $_SESSION["user"]["id"];
                         //var_dump($id);
