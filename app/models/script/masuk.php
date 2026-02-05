@@ -3,14 +3,14 @@ class Masuk
 {
     public function masuk()
     {
-        // Paksa response text supaya mudah dibaca di Network
-    header('Content-Type: text/plain; charset=utf-8');
+        // Paksa tidak redirect dulu untuk debug
+        header('Content-Type: text/plain; charset=utf-8');
 
-    // Debug awal
-    echo "DEBUG: masuk.php dijalankan\n";
-    echo "POST keys: " . implode(', ', array_keys($_POST)) . "\n";
-    echo "Username: " . ($_POST['username'] ?? 'TIDAK ADA') . "\n";
-    echo "Password input: " . ($_POST['password'] ?? 'TIDAK ADA') . "\n";
+        // Debug awal
+        echo "DEBUG: masuk.php DIPANGGIL\n";
+        echo "POST keys: " . implode(', ', array_keys($_POST)) . "\n";
+        echo "Username: " . ($_POST['username'] ?? 'TIDAK ADA') . "\n";
+        echo "Password input: " . ($_POST['password'] ?? 'TIDAK ADA') . "\n";
         require 'init_no_session.php';
         if (isset($_SESSION["user"])) {
             unset($_SESSION["user"]);
@@ -20,6 +20,7 @@ class Masuk
         $keyEncrypt = $_SESSION['key_encrypt'];
         $user = new User();
         $validate = new Validate($_POST);
+        echo "DEBUG: Setelah require init_no_session.php\n";
         //$crypto = new CryptoUtils();
         //var_dump($_POST);
         // var_dump($validate);
