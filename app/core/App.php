@@ -11,13 +11,7 @@ class App
             get_include_path()
         )));
         $url = $this->parseURL();
-echo '<pre>';
-var_dump([
-    'URL' => $url,
-    'SESSION' => $_SESSION ?? null
-]);
-echo '</pre>';
-exit;
+
         //controller
         // var_dump($url);
         if ($url && file_exists('../app/controllers/' . $url[0] . '.php')) {
