@@ -2,10 +2,6 @@
 class DB
 {
     // Property untuk koneksi ke database mysql
-    // private $_host = 'localhost';
-    // private $_dbname = 'sesendokneo_db';
-    // private $_username = 'root';
-    // private $_password = 'root123';
     private $_host = 'localhost';
     private $_dbname = 'sesendokneo_db';
     private $_username = 'root';
@@ -61,7 +57,7 @@ class DB
             }
             $stmt = $this->_pdo->prepare($query);
             $jumlahArray = count($bindValue);
-            //var_dump( 'jumlah arary : ' . $jumlahArray );
+            // var_dump( 'jumlah arary : ' . $jumlahArray );
             $nilai = 0;
             //  var_dump($query);
             for ($x = 0; $x < $jumlahArray; $x++) {

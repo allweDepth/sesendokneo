@@ -105,8 +105,7 @@ class User
         if (!isset($_SESSION["user"]['nama'])) {
             // var_dump(!isset($_SESSION["user"]));
             if (strpos($real_path, 'script')) {
-                //header("Location: login");
-                header("Location: " . BASEURL . "login");
+                header("Location: login");
             }
         }
     }

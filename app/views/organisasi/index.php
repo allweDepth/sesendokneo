@@ -68,18 +68,18 @@
                     <img src="img/avatar2/large/kristy.png">
                 </div>
                 <div class="content">
-                    <a class="header">Syamsunnar, SP, MM </a>
+                    <a class="header">Sumarlin, ST</a>
                     <div class="meta">
-                        <span class="date">2026</span>
+                        <span class="date">Joined in 2013</span>
                     </div>
                     <div class="description">
-                        Kepala Dinas
+                        Kristy is an art director living in New York.
                     </div>
                 </div>
                 <div class="extra content">
                     <a>
                         <i class="user icon"></i>
-                        500k Friends
+                        22 Friends
                     </a>
                 </div>
             </div>
@@ -89,12 +89,12 @@
                         <img src="img/avatar2/large/matthew.png">
                     </div>
                     <div class="content">
-                        <div class="header">KAMARUDDIN, ST.,M.P.W.P</div>
+                        <div class="header">Matt Giampietro</div>
                         <div class="meta">
                             <a>Friends</a>
                         </div>
                         <div class="description">
-                            Kepala Bidang
+                            Matthew is an interior designer living in New York.
                         </div>
                     </div>
                     <div class="extra content">
@@ -112,12 +112,12 @@
                         <img src="img/avatar2/large/molly.png">
                     </div>
                     <div class="content">
-                        <div class="header">SRI IRDA AYU,SP.,M.Si</div>
+                        <div class="header">Molly</div>
                         <div class="meta">
                             <span class="date">Coworker</span>
                         </div>
                         <div class="description">
-                            Sekretaris
+                            Molly is a personal assistant living in Paris.
                         </div>
                     </div>
                     <div class="extra content">
@@ -135,12 +135,12 @@
                         <img src="img/avatar2/large/elyse.png">
                     </div>
                     <div class="content">
-                        <div class="header">BACHTIAR B SUMAY,SH</div>
+                        <div class="header">Elyse</div>
                         <div class="meta">
-                            <a>----</a>
+                            <a>Coworker</a>
                         </div>
                         <div class="description">
-                            Kepala Bidang
+                            Elyse is a copywriter working in New York.
                         </div>
                     </div>
                     <div class="extra content">
@@ -158,12 +158,12 @@
                         <img src="img/avatar2/large/matthew.png">
                     </div>
                     <div class="content">
-                        <div class="header">I NYOMAN SUMERTA, ST.,M.P.W.P</div>
+                        <div class="header">Matt Giampietro</div>
                         <div class="meta">
                             <a>Friends</a>
                         </div>
                         <div class="description">
-                            Kepala Bidang
+                            Matthew is an interior designer living in New York.
                         </div>
                     </div>
                     <div class="extra content">
@@ -181,12 +181,12 @@
                         <img src="img/avatar2/large/molly.png">
                     </div>
                     <div class="content">
-                        <div class="header">NURMADINA, S.Sos. M.SI</div>
+                        <div class="header">Molly</div>
                         <div class="meta">
                             <span class="date">Coworker</span>
                         </div>
                         <div class="description">
-                            Kepala Bidang
+                            Molly is a personal assistant living in Paris.
                         </div>
                     </div>
                     <div class="extra content">
@@ -204,7 +204,7 @@
                         <img src="img/avatar2/large/elyse.png">
                     </div>
                     <div class="content">
-                        <div class="header">NARDIN,ST</div>
+                        <div class="header">Elyse</div>
                         <div class="meta">
                             <a>Coworker</a>
                         </div>
@@ -225,7 +225,7 @@
             </div>
             <div class="ui three stackable horizontal centered cards">
             <?php
-            for ($i=0; $i < 6; $i++) { 
+            for ($i=0; $i < 40; $i++) { 
                 echo '<div class="card">
                 <div class="image">
                     <img src="img/avatar2/large/matthew.png">

@@ -18,11 +18,9 @@ class Validate
 		} else {
 			$real_path = realpath(dirname(__FILE__));
 			if (strpos($real_path, 'script')) {
-				header("Location: " . BASEURL . "login");
-				//header("Location: login");
+				header("Location: login");
 			} else {
-				//header("Location: login");
-				header("Location: " . BASEURL . "login");
+				header("Location: login");
 			}
 		}
 		// var_dump($_SESSION);
