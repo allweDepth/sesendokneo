@@ -6,13 +6,13 @@
 // define('BASEURL', 'http://192.168.1.6:8085/public/');
 // define('pathURL', 'http://192.168.1.6:8085/public/');
 
-ini_set('session.save_path', '/volume1/web/sesendokneo/sessions');
-ini_set('session.cookie_secure', '0');      // wajib karena masih HTTP
-ini_set('session.cookie_httponly', '1');
-// Debug session path
-if (!is_writable(ini_get('session.save_path'))) {
-    die("FOLDER SESSION TIDAK BISA DITULIS: " . ini_get('session.save_path'));
-}
+// ini_set('session.save_path', '/volume1/web/sesendokneo/sessions');
+// ini_set('session.cookie_secure', '0');      // wajib karena masih HTTP
+// ini_set('session.cookie_httponly', '1');
+// // Debug session path
+// if (!is_writable(ini_get('session.save_path'))) {
+//     die("FOLDER SESSION TIDAK BISA DITULIS: " . ini_get('session.save_path'));
+// }
 
 define('LOCALURL', 'http://192.168.1.6:8085/');
 define('BASEURL', 'http://192.168.1.6:8085/public/');
