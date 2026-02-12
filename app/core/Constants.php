@@ -19,6 +19,7 @@ define('LOCALURL', 'http://192-168-1-2.dpupr-pasangkayu.direct.quickconnect.to:8
 define('BASEURL', 'http://192-168-1-2.dpupr-pasangkayu.direct.quickconnect.to:8085/public/');
 define('pathURL', 'http://192-168-1-2.dpupr-pasangkayu.direct.quickconnect.to:8085/public/');
 
+
 ini_set('session.save_path', '/volume1/web/sesendokneo/sessions');
 ini_set('session.cookie_secure', '0');      // wajib karena masih HTTP
 ini_set('session.cookie_httponly', '1');
