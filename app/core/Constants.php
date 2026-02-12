@@ -15,10 +15,11 @@
 // define('LOCALURL', $protocol . $host . '/');
 // define('BASEURL', $protocol . $host . '/public/');
 // define('pathURL', $protocol . $host . '/public/');
-define('LOCALURL', 'http://192-168-1-2.dpupr-pasangkayu.direct.quickconnect.to:8085/');
-define('BASEURL', 'http://192-168-1-2.dpupr-pasangkayu.direct.quickconnect.to:8085/public/');
-define('pathURL', 'http://192-168-1-2.dpupr-pasangkayu.direct.quickconnect.to:8085/public/');
+$host = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
 
+define('LOCALURL', $host . '/');
+define('BASEURL', $host . '/sesendokneo/');
+define('pathURL', $host . '/sesendokneo/');
 
 ini_set('session.save_path', '/volume1/web/sesendokneo/sessions');
 ini_set('session.cookie_secure', '0');      // wajib karena masih HTTP
