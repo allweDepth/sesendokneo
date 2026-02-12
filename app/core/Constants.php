@@ -18,8 +18,8 @@
 $host = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
 
 define('LOCALURL', $host . '/');
-define('BASEURL', $host . '/sesendokneo/');
-define('pathURL', $host . '/sesendokneo/');
+define('BASEURL', $host . '/public/');
+define('pathURL', $host . '/public/');
 
 ini_set('session.save_path', '/volume1/web/sesendokneo/sessions');
 ini_set('session.cookie_secure', '0');      // wajib karena masih HTTP
