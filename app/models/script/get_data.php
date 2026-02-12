@@ -2601,9 +2601,16 @@ class get_data
   }
   public function encrypt($formValue)
   {
+
     if (isset($_SESSION["user"]["key_encrypt"])) {
+      if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+      }
       $keyEncrypt = $_SESSION["user"]["key_encrypt"];
     } else if (isset($_SESSION["key_encrypt"])) {
+      if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+      }
       $keyEncrypt = $_SESSION["key_encrypt"];
     } else {
       $real_path = realpath(dirname(__FILE__));

@@ -25,7 +25,7 @@ class App
                     $this->controller = $url[0];
                     break;
                 default:
-                    session_start();
+                    
                     if (isset($_SESSION["user"])) {
                         if ($_SESSION["user"]['disable_login'] <= 0) {
                             if ($url[0] == 'login' || $url[0] == 'register') {

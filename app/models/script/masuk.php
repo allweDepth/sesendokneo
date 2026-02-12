@@ -8,7 +8,7 @@ class Masuk
         if (isset($_SESSION["user"])) {
             unset($_SESSION["user"]);
         }
-        
+
         $DB = DB::getInstance();
         $keyEncrypt = $_SESSION['key_encrypt'];
         $user = new User();
@@ -30,13 +30,13 @@ class Masuk
                 'required' => true,
                 'min_char' => 4
             ]);
-            
+
             // var_dump($password);
             // $password = password_hash($password, PASSWORD_DEFAULT);
             // var_dump(password_hash($password, PASSWORD_DEFAULT));
             //$password = $crypto->decrypt($password, $keyEncrypt);
             if ($validate->passed()) {
-                
+
                 $data = $DB->getQuery('SELECT * FROM user_sesendok_biila WHERE (username = ? OR email = ?)', [$username, $username])[0];
                 // var_dump($data);
                 $passIsValid = password_verify($password, $data->password);
@@ -62,6 +62,10 @@ class Masuk
                             session_start();
                         }
                         $_SESSION["user"] = (array)$data;
+                        file_put_contents(
+                            '/volume1/web/sesendokneo/debug_session.txt',
+                            print_r($_SESSION, true)
+                        );
                         $_SESSION["user"]["key_encrypt"] = KEY_ENCRYPT;
                         //var_dump($_SESSION);
                         $id = $_SESSION["user"]["id"];
@@ -83,14 +87,14 @@ class Masuk
                     }
                 } elseif ($data->disable_login > 0) {
                     $session = 6;
-                }else {
+                } else {
                     $session = 5;
                 }
             } else {
                 $session = $validate->getError();
                 // var_dump($validate->getError());
             }
-        }else{
+        } else {
             $session = 7;
         }
         return $session;
