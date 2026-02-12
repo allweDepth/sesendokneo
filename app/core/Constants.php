@@ -5,23 +5,9 @@
 // define('LOCALURL', 'http://192.168.1.6:8085/');
 // define('BASEURL', 'http://192.168.1.6:8085/public/');
 // define('pathURL', 'http://192.168.1.6:8085/public/');
-// define('LOCALURL', 'http://192.168.1.2:8085/');
-// define('BASEURL', 'http://192.168.1.2:8085/public/');
-// define('pathURL', 'http://192.168.1.2:8085/public/');
-// Auto detect domain & protocol
-// $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
-// $host = $_SERVER['HTTP_HOST'];
-
-// define('LOCALURL', $protocol . $host . '/');
-// define('BASEURL', $protocol . $host . '/public/');
-// define('pathURL', $protocol . $host . '/public/');
-$host = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
-
-define('LOCALURL', $host . '/');
-define('BASEURL', $host . '/');
-define('pathURL', $host . '/');
-
-
+define('LOCALURL', 'http://192.168.1.2:8085/');
+define('BASEURL', 'http://192.168.1.2:8085/public/');
+define('pathURL', 'http://192.168.1.2:8085/public/');
 ini_set('session.save_path', '/volume1/web/sesendokneo/sessions');
 ini_set('session.cookie_secure', '0');      // wajib karena masih HTTP
 ini_set('session.cookie_httponly', '1');
