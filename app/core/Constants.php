@@ -5,9 +5,12 @@
 // define('LOCALURL', 'http://192.168.1.6:8085/');
 // define('BASEURL', 'http://192.168.1.6:8085/public/');
 // define('pathURL', 'http://192.168.1.6:8085/public/');
-define('LOCALURL', 'http://192.168.1.2:8085/');
-define('BASEURL', 'http://192.168.1.2:8085/public/');
-define('pathURL', 'http://192.168.1.2:8085/public/');
+$host = $_SERVER['HTTP_HOST'];
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+
+define('LOCALURL', $protocol . $host . '/');
+define('BASEURL', $protocol . $host . '/public/');
+define('pathURL', $protocol . $host . '/public/');
 ini_set('session.save_path', '/volume1/web/sesendokneo/sessions');
 ini_set('session.cookie_secure', '0');      // wajib karena masih HTTP
 ini_set('session.cookie_httponly', '1');
