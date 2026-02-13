@@ -11,7 +11,9 @@ class App
             get_include_path()
         )));
         $url = $this->parseURL();
-
+        if ($url) {
+            $url[0] = strtolower($url[0]);
+        }
         //controller
         // var_dump($url);
         if ($url && file_exists('../app/controllers/' . strtolower($url[0]) . '.php')) {
