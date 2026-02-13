@@ -102,70 +102,56 @@ $(document).ready(function () {
 		$('.ui.form.login').form('submit');
 		return false;
 	})
-	$('.ui.form.login').form({
-		fields: {
-			username: {
-				identifier: 'username',
-				rules: [{
-					type: 'empty',
-					prompt: 'Please enter your username or e-mail'
-				}]
-			},
-			password: {
-				identifier: 'password',
-				rules: [{
-					type: 'empty',
-					prompt: 'Please enter your password'
-				}]
-			}
-		},
-		onSuccess: function (event) {
-			event.preventDefault();
-			//$(this).serialize();
+$('.ui.form.login').form({
+    fields: {
+        username: { /* ... */ },
+        password: { /* ... */ }
+    },
+    onSuccess: function (event) {
+        event.preventDefault();
 
-			var dataku = $(this).serializeArray();
-			var username = dataku[0].value;
-			var password = dataku[1].value;
-			username = encryption.encrypt(username, keyEncryption);
-			password = encryption.encrypt(password, keyEncryption);
+        var dataku = $(this).serializeArray();
+        var username = dataku[0].value;
+        var password = dataku[1].value;
+        username = encryption.encrypt(username, keyEncryption);
+        password = encryption.encrypt(password, keyEncryption);
 
-			const url = BASEURL + halamandok + "/masuk";
-			let data = {
-				username: username,
-				password: password,
-				login: 'login',
-				dok: 'dok',
-				cry: true
-			}
-			$.ajax({
-				type: "POST",
-				data: data,
-				url: url,
-				dataType: 'JSon',
-				success: function (result) {
-					if (parseInt(result) == 1) {
-						window.location.href = BASEURL + "home"; //admin
-					} else if (parseInt(result) == 2) {
-						window.location.href = BASEURL + "home";
-					} else if (parseInt(result) == 6) {
-						modal_notif(
-							'<i class="info icon"></i>Akun belum aktif',
-							'Hubungi admin untuk mengaktifkan akun anda'
-						);
-					} else if (parseInt(result) == 7) {
-						modal_notif(
-							'<i class="info icon"></i>Gagal Login',
-							'Kombinasi akun anda salah'
-						);
-					}
-				},
-				error: function (jqXHR, status, err) {
-				}
-			});
-			(async () => {
-			})();
-		}
-	});
+        const url = BASEURL + halamandok + "/masuk";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                username: username,
+                password: password,
+                login: 'login',
+                dok: 'dok',
+                cry: true
+            },
+            dataType: 'json', // <- perbaikan disini
+            success: function(result) {
+                switch(parseInt(result)){
+                    case 1:
+                    case 2:
+                        window.location.href = BASEURL + "home";
+                        break;
+                    case 6:
+                        modal_notif('<i class="info icon"></i>Akun belum aktif','Hubungi admin untuk mengaktifkan akun anda');
+                        break;
+                    case 7:
+                        modal_notif('<i class="info icon"></i>Gagal Login','Kombinasi akun anda salah');
+                        break;
+                    default:
+                        modal_notif('<i class="info icon"></i>Kesalahan','Kode error: ' + result);
+                }
+            },
+            error: function(xhr, status, err){
+                console.error('AJAX Error:', err);
+                modal_notif('<i class="info icon"></i>Server Error', err);
+            }
+        });
+    }
+});
+
 	//=======================================
 	//===============FORM GLOBAL=============
 	//=======================================
