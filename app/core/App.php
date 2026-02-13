@@ -14,7 +14,7 @@ class App
 
         //controller
         // var_dump($url);
-        if ($url && file_exists('../app/controllers/' . $url[0] . '.php')) {
+        if ($url && file_exists('../app/controllers/' . strtolower($url[0]) . '.php')) {
             //var_dump($_SESSION["user"]);
             switch ($url[0]) {
                 case 'login':
