@@ -16,7 +16,7 @@ class Masuk
         //$crypto = new CryptoUtils();
         // var_dump($_POST);
         // var_dump($validate);
-        if (isset($_POST['login'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // var_dump($_POST);
             $username = $validate->setRules('username', 'Username', [
                 'sanitize' => 'string',
