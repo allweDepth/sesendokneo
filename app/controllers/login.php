@@ -4,9 +4,9 @@ class Login extends Controller
     public function index()
     {
         
-        if (isset($_SESSION["user"])) {
-            unset($_SESSION["user"]);
-        }
+        // if (isset($_SESSION["user"])) {
+        //     unset($_SESSION["user"]);
+        // }
         // pastikan session dimulai terlebih dahulu
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
