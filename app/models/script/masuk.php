@@ -3,6 +3,9 @@ class Masuk
 {
     public function masuk()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         // var_dump($_POST);
         require 'init_no_session.php';
         if (isset($_SESSION["user"])) {
