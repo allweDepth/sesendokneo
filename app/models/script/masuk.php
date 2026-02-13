@@ -5,13 +5,9 @@ class Masuk
     {
         // var_dump($_POST);
         require 'init_no_session.php';
-        // pastikan session aktif
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+        if (isset($_SESSION["user"])) {
+            unset($_SESSION["user"]);
         }
-        // if (isset($_SESSION["user"])) {
-        //     unset($_SESSION["user"]);
-        // }
 
         $DB = DB::getInstance();
         $keyEncrypt = $_SESSION['key_encrypt'];
