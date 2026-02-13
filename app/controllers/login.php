@@ -3,14 +3,14 @@ class Login extends Controller
 {
     public function index()
     {
+        
+        if (isset($_SESSION["user"])) {
+            unset($_SESSION["user"]);
+        }
         // pastikan session dimulai terlebih dahulu
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        if (isset($_SESSION["user"])) {
-            unset($_SESSION["user"]);
-        }
-        session_start();
         $key_encrypt = $this->scriptConstruct("query", ['jns' => 'key_encrypt', 'tbl' => 'key_encrypt'])->key_encrypt();
         $_SESSION["key_encrypt"] = $key_encrypt;
         $_SESSION["tesbede"] = $key_encrypt;
