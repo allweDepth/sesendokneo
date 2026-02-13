@@ -10,7 +10,7 @@ class home extends Controller
     {
         $data = $this->script("get_data")->get_data();
         echo $data;
-    }
+    }//
     public function edit_cell()
     {
         $data = $this->script("edit_cell")->edit_cell();

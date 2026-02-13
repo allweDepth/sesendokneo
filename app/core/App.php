@@ -11,12 +11,10 @@ class App
             get_include_path()
         )));
         $url = $this->parseURL();
-        if ($url) {
-            $url[0] = strtolower($url[0]);
-        }
+
         //controller
         // var_dump($url);
-        if ($url && file_exists('../app/controllers/' . strtolower($url[0]) . '.php')) {
+        if ($url && file_exists('../app/controllers/' . $url[0] . '.php')) {
             //var_dump($_SESSION["user"]);
             switch ($url[0]) {
                 case 'login':
@@ -27,7 +25,7 @@ class App
                     $this->controller = $url[0];
                     break;
                 default:
-
+                    session_start();
                     if (isset($_SESSION["user"])) {
                         if ($_SESSION["user"]['disable_login'] <= 0) {
                             if ($url[0] == 'login' || $url[0] == 'register') {
@@ -36,8 +34,8 @@ class App
                             $this->controller = $url[0];
                         }
                     } else {
-                        $url[0] = 'login';
-                        $this->controller = 'login';
+                        $url[0] == 'login';
+                        $this->controller = $url[0];
                     }
                     break;
             }

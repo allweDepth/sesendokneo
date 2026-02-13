@@ -68,18 +68,18 @@
                     <img src="img/avatar2/large/kristy.png">
                 </div>
                 <div class="content">
-                    <a class="header">SYAMSUNAR,SP.,M.M</a>
+                    <a class="header">Sumarlin, ST</a>
                     <div class="meta">
-                        <span class="date">NIP. 197503102009031001</span>
+                        <span class="date">Joined in 2013</span>
                     </div>
                     <div class="description">
-                        Pembina,IV/a
+                        Kristy is an art director living in New York.
                     </div>
                 </div>
                 <div class="extra content">
                     <a>
                         <i class="user icon"></i>
-                        Kepala Dinas
+                        22 Friends
                     </a>
                 </div>
             </div>
@@ -89,12 +89,12 @@
                         <img src="img/avatar2/large/matthew.png">
                     </div>
                     <div class="content">
-                        <div class="header">SRI IRDA AYU,SP.,M.Si</div>
+                        <div class="header">Matt Giampietro</div>
                         <div class="meta">
-                            <a>NIP. 198306252005022003</a>
+                            <a>Friends</a>
                         </div>
                         <div class="description">
-                            Sekretaris
+                            Matthew is an interior designer living in New York.
                         </div>
                     </div>
                     <div class="extra content">
@@ -103,7 +103,7 @@
                         </span>
                         <span>
                             <i class="user icon"></i>
-                            NIP. 198306252005022003
+                            75 Friends
                         </span>
                     </div>
                 </div>

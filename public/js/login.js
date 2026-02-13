@@ -1,7 +1,7 @@
-var dok = "";
+var dok = '';
 $(document).ready(function () {
 	"use strict";
-	$(".ui.vertical.stripe.segment .ui.container").visibility({
+	$('.ui.vertical.stripe.segment .ui.container').visibility({
 		once: false,
 		// update size when new content loads
 		observeChanges: true,
@@ -19,134 +19,157 @@ $(document).ready(function () {
 			// do something whenever calculations adjust
 			// console.log(`onUpdate =`);
 			// console.log(calculations);
+
 		},
 		// load content on bottom edge visible
 		onBottomVisible: function (calculations) {
 			console.log(`onBottomVisible =`);
 			console.log(calculations);
-		},
+		}
 	});
 	// fix menu when passed
-	$(".masthead").visibility({
-		once: false,
-		onBottomPassed: function () {
-			$(".fixed.menu").transition("fade in");
-		},
-		onBottomPassedReverse: function () {
-			$(".fixed.menu").transition("fade out");
-		},
-	});
+	$('.masthead')
+		.visibility({
+			once: false,
+			onBottomPassed: function () {
+				$('.fixed.menu').transition('fade in');
+			},
+			onBottomPassedReverse: function () {
+				$('.fixed.menu').transition('fade out');
+			}
+		})
+		;
 	let handler = {
 		activate: function () {
-			if (!$(this).hasClass("dropdown browse")) {
+			if (!$(this).hasClass('dropdown browse')) {
 				$(this)
-					.addClass("active")
-					.closest(".ui.menu")
-					.find(".item")
+					.addClass('active')
+					.closest('.ui.menu')
+					.find('.item')
 					.not($(this))
-					.removeClass("active");
+					.removeClass('active')
+					;
 			}
-		},
-	};
-	$(".menu .item.inayah").on("click", handler.activate);
+		}
+	}
+	$(".menu .item.inayah").on('click', handler.activate);
 	// create sidebar and attach to menu open
-	$(".ui.sidebar").sidebar("attach events", ".toc.item");
+	$('.ui.sidebar')
+		.sidebar('attach events', '.toc.item')
+		;
 	$(".ui.accordion").accordion();
 	$(".ui.accordion.menu_utama").accordion({
-		exclusive: false,
+		exclusive: false
 	});
 	$(".ui.dropdown").dropdown();
 	//Sticking to Own Context
-	$(".ui.sticky").sticky({
-		context: ".pusher",
-		pushing: true,
-	});
+	$('.ui.sticky')
+		.sticky({
+			context: '.pusher',
+			pushing: true
+		});
 
 	var keyEncryption = halamanDefault;
 	let encryption = new Encryption();
 
 	function modal_notif(kop, conten) {
-		$("#kop_notifikasi").html(kop);
-		$("#conten_notifikasi").html("<p>" + conten + "</p>");
-		$(".ui.basic.modal.info").modal("show");
+
+		$('#kop_notifikasi').html(kop);
+		$('#conten_notifikasi').html('<p>' + conten + '</p>');
+		$('.ui.basic.modal.info').modal('show');
 	}
-	$(document).on("click", "a[name='modal']", function (event) {
+	$(document).on('click', "a[name='modal']", function (event) {
 		event.preventDefault();
-		$(".ui.modal.login").modal("show");
-	});
-	$(document).on("click", "a[name='modal-register']", function (event) {
+		$('.ui.modal.login')
+			.modal('show')
+			;
+	})
+	$(document).on('click', "a[name='modal-register']", function (event) {
 		event.preventDefault();
-		$(".ui.modal.register").modal("show");
+		$('.ui.modal.register')
+			.modal('show');
 		let MyForm = $(`.ui.form[name="form_modal"]`);
-		MyForm.attr("jns", "register").attr("tbl", "register");
+		MyForm.attr('jns', 'register').attr('tbl', 'register');
 		let modalGeneral = new ModalConstructor(`.ui.modal.register`);
 		modalGeneral.globalModal();
 		let form = new FormGlobal(`.ui.form[name="form_modal"]`);
 		form.run();
 		form.addRulesForm();
-	});
-	$(document).on("click", "button[name='login']", function (event) {
+	})
+	$(document).on('click', "button[name='login']", function (event) {
 		event.preventDefault();
-		dok = $(this).attr("value");
-		$(".ui.form.login").form("submit");
+		dok = $(this).attr('value');
+		$('.ui.form.login').form('submit');
 		return false;
-	});
-	// Tangkap submit form login
-	$(".ui.form.login").on("submit", function (e) {
-		e.preventDefault(); // cegah reload page
+	})
+	$('.ui.form.login').form({
+		fields: {
+			username: {
+				identifier: 'username',
+				rules: [{
+					type: 'empty',
+					prompt: 'Please enter your username or e-mail'
+				}]
+			},
+			password: {
+				identifier: 'password',
+				rules: [{
+					type: 'empty',
+					prompt: 'Please enter your password'
+				}]
+			}
+		},
+		onSuccess: function (event) {
+			event.preventDefault();
+			//$(this).serialize();
 
-		// Ambil input username dan password
-		let username = $(this).find('input[name="username"]').val().trim();
-		let password = $(this).find('input[name="password"]').val().trim();
+			var dataku = $(this).serializeArray();
+			var username = dataku[0].value;
+			var password = dataku[1].value;
+			username = encryption.encrypt(username, keyEncryption);
+			password = encryption.encrypt(password, keyEncryption);
 
-		if (username === "" || password === "") {
-			alert("Username dan password wajib diisi!");
-			return;
-		}
-
-		// Kirim AJAX ke PHP
-		$.ajax({
-			url: "/public/Login/masuk", // sesuaikan path sesuai servermu
-			method: "POST",
-			data: { username: username, password: password },
-			dataType: "json", // PHP mengembalikan angka
-			success: function (response) {
-				// Pastikan response berupa angka
-				let kode = parseInt(response);
-
-				switch (kode) {
-					case 1: // admin login sukses
-					case 2: // user login sukses
-						window.location.href = "/public/home";
-						break;
-					case 4:
-						alert("Akun sedang error, coba lagi nanti.");
-						break;
-					case 5:
-						alert("Username atau password salah.");
-						break;
-					case 6:
-						alert("Akun Anda dinonaktifkan.");
-						break;
-					case 7:
-						alert("Login gagal: Username atau password salah!");
-						break;
-					default:
-						alert("Terjadi kesalahan tak terduga: " + kode);
+			const url = BASEURL + halamandok + "/masuk";
+			let data = {
+				username: username,
+				password: password,
+				login: 'login',
+				dok: 'dok',
+				cry: true
+			}
+			$.ajax({
+				type: "POST",
+				data: data,
+				url: url,
+				dataType: 'JSon',
+				success: function (result) {
+					if (parseInt(result) == 1) {
+						window.location.href = BASEURL + "home"; //admin
+					} else if (parseInt(result) == 2) {
+						window.location.href = BASEURL + "home";
+					} else if (parseInt(result) == 6) {
+						modal_notif(
+							'<i class="info icon"></i>Akun belum aktif',
+							'Hubungi admin untuk mengaktifkan akun anda'
+						);
+					} else if (parseInt(result) == 7) {
+						modal_notif(
+							'<i class="info icon"></i>Gagal Login',
+							'Kombinasi akun anda salah'
+						);
+					}
+				},
+				error: function (jqXHR, status, err) {
 				}
-			},
-			error: function (xhr, status, err) {
-				console.error("AJAX Error:", status, err);
-				alert("Terjadi kesalahan server. Cek console untuk detail.");
-			},
-		});
+			});
+			(async () => {
+			})();
+		}
 	});
-
 	//=======================================
 	//===============FORM GLOBAL=============
 	//=======================================
-	class FormGlobal {
-		//@audit-ok Form
+	class FormGlobal {//@audit-ok Form
 		constructor(form) {
 			this.form = $(form); //element;
 		}
@@ -158,12 +181,12 @@ $(document).ready(function () {
 					e.preventDefault();
 					loaderShow();
 					const [node] = $(MyForm);
-					const attrs = {};
+					const attrs = {}
 					$.each(node.attributes, (index, attribute) => {
 						attrs[attribute.name] = attribute.value;
 						let attrName = attribute.name;
 						//membuat variabel
-						let myVariable = attrName + "Attr";
+						let myVariable = attrName + 'Attr';
 						window[myVariable] = attribute.value;
 					});
 					let jalankanAjax = false;
@@ -176,15 +199,12 @@ $(document).ready(function () {
 					//loaderShow();
 					let formData = new FormData(this);
 					//ubah angka indonesia menjadi standar
-					let elmRms = MyForm.find("input[rms]");
+					let elmRms = MyForm.find('input[rms]');
 					Object.keys(elmRms).forEach((key) => {
 						let element = $(elmRms[key]);
 						let namaAttr = element.attr("name");
 						if (namaAttr !== undefined) {
-							formData.set(
-								namaAttr,
-								accounting.unformat(formData.get(namaAttr), ","),
-							);
+							formData.set(namaAttr, accounting.unformat(formData.get(namaAttr), ","));
 						}
 					});
 					formData.set("jenis", jenis);
@@ -207,9 +227,9 @@ $(document).ready(function () {
 					if (property.length > 0) {
 						for (const key of property) {
 							let namaAttr = $(key).attr("name");
-							formData.has(namaAttr) === false
-								? formData.set(namaAttr, "off")
-								: formData.set(namaAttr, "on"); // Returns false
+							(formData.has(namaAttr) === false)
+								? formData.set(namaAttr, 'off')
+								: formData.set(namaAttr, 'on'); // Returns false
 						}
 					}
 					property = ini.find(".ui.calendar.date");
@@ -218,9 +238,8 @@ $(document).ready(function () {
 							let nameAttr = $(key).find("[name]").attr("name");
 							let tanggal = $(key).calendar("get date");
 							if (tanggal) {
-								tanggal = `${tanggal.getFullYear()}-${
-									tanggal.getMonth() + 1
-								}-${tanggal.getDate()}`; //local time
+								tanggal = `${tanggal.getFullYear()}-${tanggal.getMonth() + 1
+									}-${tanggal.getDate()}`; //local time
 								formData.set(nameAttr, tanggal);
 							}
 						}
@@ -242,10 +261,7 @@ $(document).ready(function () {
 							let nameAttr = $(key).find("[name]").attr("name");
 							let tanggal = $(key).calendar("get date");
 							if (tanggal) {
-								tanggal = new Date(tanggal)
-									.toISOString()
-									.slice(0, 19)
-									.replace("T", " ");
+								tanggal = new Date(tanggal).toISOString().slice(0, 19).replace('T', ' ');
 								formData.set(nameAttr, tanggal);
 							}
 						}
@@ -256,14 +272,14 @@ $(document).ready(function () {
 						// =================
 						case "form_modal":
 							switch (jenis) {
-								case "register":
+								case 'register':
 									switch (tbl) {
-										case "register":
+										case 'register':
 											cryptos = true;
 											jalankanAjax = true;
 											url = BASEURL + halamandok + "/register";
 											// const url = BASEURL + halamandok + "/masuk";
-											formData.set("register", "register");
+											formData.set('register', 'register');
 											break;
 
 										default:
@@ -279,6 +295,7 @@ $(document).ready(function () {
 						// UNTUK FORM FLYOUT
 						// =================
 						case "form_flyout":
+
 							break;
 					}
 					if (cryptos) {
@@ -286,31 +303,34 @@ $(document).ready(function () {
 						let encryption = new Encryption();
 						formData.forEach((value, key) => {
 							switch (key) {
-								case "jenis":
-								case "tbl":
+								case 'jenis':
+								case 'tbl':
 									break;
 								default:
 									formData.set(key, encryption.encrypt(value, keyEncryption));
 									break;
 							}
 						});
-						formData.set("cry", true);
+						formData.set('cry', true);
+
 					}
 					if (jalankanAjax) {
 						suksesAjax["ajaxku"] = function (result) {
 							let kelasToast = "success";
-							let list = "";
+							let list = '';
 							if (result.success === true) {
+
 							} else {
 								kelasToast = "warning"; //'success'
 								let dataresul = result.data;
 								if (Object.keys(dataresul).length > 0) {
-									let liOl = "";
+
+									let liOl = '';
 									for (let x in dataresul) {
 										liOl += `<li>${dataresul[x]}</li>`;
 									}
 									list = `<ul class="ui list">${liOl}</ul>`;
-									result.error.message = result.error.message + list;
+									result.error.message = result.error.message + list
 								}
 							}
 							showToast(result.error.message, {
@@ -327,7 +347,7 @@ $(document).ready(function () {
 							false,
 							false,
 							"ajaxku",
-							cryptos,
+							cryptos
 						);
 						//runAjax("script/master_read_xlsx", "POST", formData, false, false, false, 'upload_renja');// untuk type file
 						//runAjax("script/load_data", "POST", data, 'text', undefined, undefined, "draft_renstra");// type text
@@ -375,7 +395,7 @@ $(document).ready(function () {
 					}
 				}
 				let non_data = $(iterator).attr("non_data");
-				if (typeof non_data === "undefined" || non_data === false) {
+				if (typeof non_data === 'undefined' || non_data === false) {
 					MyForm.form("add rule", atribut, {
 						rules: [
 							{
@@ -400,10 +420,7 @@ $(document).ready(function () {
 				if (lbl === undefined) {
 					lbl = MyForm.find(attrName[i]).closest(".field").find("label").text();
 					if (lbl === undefined || lbl === "") {
-						lbl = MyForm.find(attrName[i])
-							.closest(".field")
-							.find("div.sub.header")
-							.text();
+						lbl = MyForm.find(attrName[i]).closest(".field").find("div.sub.header").text();
 					}
 					if (lbl === undefined || lbl === "") {
 						lbl = atribut.replaceAll(/_/g, " ");
@@ -425,8 +442,7 @@ $(document).ready(function () {
 	//=======================================
 	//===============MODAL GLOBAL=============
 	//=======================================
-	class ModalConstructor {
-		//@audit-ok ModalConstructor
+	class ModalConstructor {//@audit-ok ModalConstructor
 		constructor(modal) {
 			this.modal = $(modal); //element;
 		}
@@ -437,17 +453,19 @@ $(document).ready(function () {
 				//observeChanges: true,
 				closable: false,
 				transition: "zoom", //slide down,'slide up','browse right','browse','swing up','vertical flip','fly down','drop','zoom','scale'
-				onDeny: function () {},
+				onDeny: function () {
+				},
 				onApprove: function () {
 					// jika di tekan yes
 					$(this).find("form").trigger("submit");
 					return false;
 				},
-				onShow: function () {},
+				onShow: function () {
+				},
 				onHidden: function () {
 					// loaderHide();
 					$(this).find("form").form("reset");
-				},
+				}
 			});
 		}
 	}
@@ -456,8 +474,8 @@ $(document).ready(function () {
 	//=========== class dropdown ========
 	//===================================
 	class DropdownConstructor {
-		jenis = "";
-		tbl = "";
+		jenis = '';
+		tbl = '';
 		ajax = false;
 		result_ajax = {};
 		url = BASEURL + "/register/wilayah";
@@ -490,8 +508,7 @@ $(document).ready(function () {
 						},
 						rows: countRows(), //"all",
 						halaman: 1,
-					},
-					fields: {
+					}, fields: {
 						results: "results",
 					},
 					// filterRemoteData: true,
@@ -501,44 +518,36 @@ $(document).ready(function () {
 				// saveRemoteData: false,
 			});
 		}
-		returnListOnChange(
-			jenis = "list_dropdown",
-			tbl = "satuan",
-			minCharacters = 3,
-			allField = {},
-		) {
+		returnListOnChange(jenis = "list_dropdown", tbl = "satuan", minCharacters = 3, allField = {}) {
 			let get = this.element.dropdown("get query");
 			let elm = this.element;
-			let dataSend = Object.assign(
-				{
-					jenis: jenis,
-					tbl: tbl,
-					cari: function (value) {
-						return elm.dropdown("get query");
-					},
-					rows: "10", //"all",
-					halaman: 1,
+			let dataSend = Object.assign({
+				jenis: jenis,
+				tbl: tbl,
+				cari: function (value) {
+					return elm.dropdown("get query");
 				},
-				allField,
-			);
+				rows: '10', //"all",
+				halaman: 1
+			}, allField);
 			switch (jenis) {
-				case "list_dropdown":
+				case 'list_dropdown':
 					switch (tbl) {
-						case "wilayah": //url = BASEURL + halamandok + "/register";
+						case 'wilayah'://url = BASEURL + halamandok + "/register";
 							this.url = BASEURL + halamandok + "/wilayah";
 							break;
-						case "organisasi":
+						case 'organisasi':
 							this.url = BASEURL + halamandok + "/organisasi";
 							break;
 						default:
 							break;
 					}
 					break;
-				case "value1":
+				case 'value1':
 					break;
 				default:
 					break;
-			}
+			};
 			this.element.dropdown({
 				minCharacters: minCharacters,
 				maxResults: 10,
@@ -560,70 +569,66 @@ $(document).ready(function () {
 					// filterRemoteData: true,
 				},
 				onChange: function (value, text, $choice) {
-					let dataChoice = $($choice).find("span.description").text();
+					let dataChoice = $($choice).find('span.description').text();
 					let ajaxSend = false;
 					switch (jenis) {
-						case "list_dropdown":
+						case 'list_dropdown':
 							switch (tbl) {
-								case "wilayah": //tujuan sasaran renstra
+								case 'wilayah'://tujuan sasaran renstra
 									ajaxSend = true;
 									break;
 								default:
 									break;
 							}
 							break;
-						case "value1":
+						case 'value1':
 							break;
 						default:
 							break;
-					}
+					};
 					if (ajaxSend == true) {
 						let data = {
 							jenis: jenis,
-							tbl: tbl,
+							tbl: tbl
 						};
-						let url = "script/register_akun";
+						let url = 'script/register_akun';
 						let cryptos = false;
 						switch (jenis) {
-							case "list_dropdown":
+							case 'list_dropdown':
 								switch (tbl) {
-									case "wilayah": //tujuan sasaran renstra
+									case 'wilayah'://tujuan sasaran renstra
 										let elementDrop = $(`.ui.organisasi.dropdown.ajx`);
-										data.kd_wilayah = $(".ui.wilayah.dropdown.ajx").dropdown(
-											"get value",
-										);
+										data.kd_wilayah = $('.ui.wilayah.dropdown.ajx').dropdown('get value');
 										url = BASEURL + halamandok + "/organisasi";
 										break;
 									default:
 										break;
 								}
 								break;
-							case "value1":
+							case 'value1':
 								break;
 							default:
 								break;
-						}
+						};
 						suksesAjax["ajaxku"] = function (result) {
 							let kelasToast = "success";
 							if (result.success === true) {
 								switch (jenis) {
-									case "list_dropdown":
+									case 'list_dropdown':
 										switch (tbl) {
-											case "wilayah": //tujuan sasaran renstra
-												$(`.ui.organisasi.dropdown.ajx`).dropdown({
-													values: result.results,
-												});
+											case 'wilayah'://tujuan sasaran renstra
+												$(`.ui.organisasi.dropdown.ajx`).dropdown({ values: result.results });
 
 												break;
 											default:
 												break;
 										}
 										break;
-									case "value1":
+									case 'value1':
 										break;
 									default:
 										break;
-								}
+								};
 							} else {
 								kelasToast = "warning"; //'success'
 							}
@@ -631,17 +636,9 @@ $(document).ready(function () {
 								class: kelasToast,
 								icon: "check circle icon",
 							});
+
 						};
-						runAjax(
-							url,
-							"POST",
-							data,
-							"Json",
-							undefined,
-							undefined,
-							"ajaxku",
-							cryptos,
-						);
+						runAjax(url, "POST", data, "Json", undefined, undefined, "ajaxku", cryptos);
 					}
 				},
 			});
@@ -664,21 +661,22 @@ $(document).ready(function () {
 			let ajaxSend = ajax;
 			this.element.dropdown({
 				onChange: function (value, text, $choice) {
-					let dataChoice = $($choice).find("span.description").text();
+					let dataChoice = $($choice).find('span.description').text();
 					switch (jenis) {
-						case "getJsonRows":
+						case 'getJsonRows':
 							switch (tbl) {
-								case "tujuan_renstra": //tujuan sasaran renstra
+								case 'tujuan_renstra'://tujuan sasaran renstra
+
 									break;
 								default:
 									break;
 							}
 							break;
-						case "value1":
+						case 'value1':
 							break;
 						default:
 							break;
-					}
+					};
 					if (ajaxSend == true) {
 						let data = {
 							cari: cari(jenis),
@@ -687,20 +685,21 @@ $(document).ready(function () {
 							tbl: tbl,
 							halaman: halaman,
 						};
-						let url = "script/register_akun";
+						let url = 'script/register_akun';
 						let cryptos = false;
 
 						suksesAjax["ajaxku"] = function (result) {
 							var kelasToast = "success";
 							if (result.success === true) {
 								switch (jenis) {
-									case "getJsonRows":
+									case 'getJsonRows':
+
 										break;
-									case "value1":
+									case 'value1':
 										break;
 									default:
 										break;
-								}
+								};
 							} else {
 								kelasToast = "warning"; //'success'
 							}
@@ -710,30 +709,22 @@ $(document).ready(function () {
 							});
 							loaderHide();
 						};
-						runAjax(
-							url,
-							"POST",
-							data,
-							"Json",
-							undefined,
-							undefined,
-							"ajaxku",
-							cryptos,
-						);
+						runAjax(url, "POST", data, "Json", undefined, undefined, "ajaxku", cryptos);
 					}
 				},
 				saveRemoteData: true,
-				filterRemoteData: true,
+				filterRemoteData: true
 			});
 		}
 		valuesDropdown(values) {
 			this.element.dropdown({
-				values: values,
-			});
+				values: values
+			})
 		}
 	}
-	let dropdownWilayah = new DropdownConstructor(".ui.wilayah.dropdown.ajx");
+	let dropdownWilayah = new DropdownConstructor('.ui.wilayah.dropdown.ajx');
 	dropdownWilayah.returnListOnChange("list_dropdown", "wilayah", 3);
+
 
 	//=============================
 	// ini general Ajax parameter.
@@ -745,7 +736,7 @@ $(document).ready(function () {
 		dataType,
 		contentType,
 		processData,
-		callback,
+		callback
 	) {
 		this.url = url;
 		this.type = type;
@@ -775,7 +766,7 @@ $(document).ready(function () {
 					var resultObject = JSON.parse(jqXHR.responseText, reviver);
 					modal_notif(
 						'<i class="huge info circle icon"></i>' + textStatus,
-						jqXHR.responseText.split('"')[1],
+						jqXHR.responseText.split('"')[1]
 					);
 				} catch (e) {
 					modal_notif('<i class="info icon"></i>' + textStatus, err);
@@ -790,7 +781,7 @@ $(document).ready(function () {
 		contentType,
 		processData,
 		callback,
-		cryptos = false,
+		cryptos = false
 	) {
 		if (type === undefined) {
 			type = "POST";
@@ -828,7 +819,7 @@ $(document).ready(function () {
 			dataType,
 			contentType,
 			processData,
-			callback,
+			callback
 		);
 		generalAjax(params);
 	}
@@ -886,9 +877,10 @@ $(document).ready(function () {
 	function loaderHide() {
 		$(".demo.page.dimmer:first").dimmer("hide");
 	}
+
 });
 function changePassView() {
 	let getPwdView = $("input[name='password']");
 	const type = getPwdView.attr("type") === "password" ? "text" : "password";
-	getPwdView.attr("type", type);
+	getPwdView.attr("type", type)
 }
